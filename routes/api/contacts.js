@@ -3,13 +3,13 @@ const router = express.Router();
 const { validateBody } = require("../../middlewares/index");
 const { newContactSchema } = require("../../validation/contacts");
 const {
-  changeContact,
+  getContacts,
+  getContact,
   createContact,
   deleteContact,
-  getContact,
-  getContacts,
+  changeContact,
   updateStatus,
-} = require("../../contollers/contacts.controller.js");
+} = require("../../controllers/contacts/index");
 
 router.get("/", getContacts);
 
