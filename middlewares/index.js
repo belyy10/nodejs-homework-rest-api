@@ -1,6 +1,8 @@
 const { httpError } = require("../utils/httpError/contacts");
 const jwt = require("jsonwebtoken");
 const { User } = require("../service/schemas/users");
+const multer = require("multer");
+const path = require("path");
 
 function validateBody(schema) {
   return (req, res, next) => {
@@ -36,7 +38,22 @@ async function auth(req, res, next) {
   }
   next();
 }
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.resolve(__dirname, "../tmp"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Math.random() + file.originalname);
+  },
+});
+
+const upload = multer({
+  storage,
+});
+
 module.exports = {
   validateBody,
   auth,
+  upload,
 };

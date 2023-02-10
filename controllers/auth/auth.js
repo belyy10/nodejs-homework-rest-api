@@ -2,6 +2,7 @@ const { User } = require("../../service/schemas/users");
 const { httpError } = require("../../utils/httpError/contacts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const gravatar = require("gravatar");
 
 async function register(req, res, next) {
   const { email, password } = req.body;
@@ -18,9 +19,11 @@ async function register(req, res, next) {
   }
 
   try {
+    const avatar = gravatar.url(email, { s: "100", r: "x", d: "retro" });
     const savedUser = await User.create({
       email,
       password: hashedPassword,
+      avatar,
     });
     res.status(201).json({
       data: {

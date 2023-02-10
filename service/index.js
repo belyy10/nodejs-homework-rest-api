@@ -1,9 +1,5 @@
 const Contact = require("./schemas/contacts");
 
-const getAllContacts = async () => {
-  return Contact.find({});
-};
-
 const getContactById = (id) => {
   return Contact.findById({ _id: id });
 };
@@ -21,7 +17,6 @@ const removeContact = (id) => {
 };
 
 module.exports = {
-  getAllContacts,
   getContactById,
   createContact,
   updateContact,

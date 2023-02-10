@@ -4,10 +4,12 @@ async function createContact(req, res, next) {
   const { user } = req;
   const { id: contactId } = req.body;
   user.contacts.push(contactId);
-  await User.findByIdAndUpdate(user._id, user);
+  const updatedUser = await User.findByIdAndUpdate(user._id, user, {
+    new: true,
+  });
   return res.status(201).json({
     data: {
-      contacts: user.contacts,
+      contacts: updatedUser.contacts,
     },
   });
 }

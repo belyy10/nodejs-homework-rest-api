@@ -20,6 +20,10 @@ const contact = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  avatar: {
+    type: String,
+    default: "",
+  },
   versionKey: false,
 });
 
